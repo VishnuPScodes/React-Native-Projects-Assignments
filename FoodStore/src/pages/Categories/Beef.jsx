@@ -10,8 +10,12 @@ import {
   Image,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { changePath } from "../../redux/action";
 export default function Beef({ navigation }) {
   const [data, setData] = useState([]);
+  const dispatch=useDispatch();
+
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef")
@@ -25,27 +29,30 @@ export default function Beef({ navigation }) {
       <Text>Welcome to food store</Text>
 
       <FlatList
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.idMeal}
         data={data}
         renderItem={({ item }) => {
           return (
-            <View>
+            <>
               <TouchableOpacity
                 onPress={() => {
+                   dispatch(changePath('Beef'))
                   navigation.navigate("Details", {
                     image: item.strMealThumb,
                     name: item.strMeal,
+                    path: "Beef",
                   });
                 }}
                 style={styles.content}
               >
                 <Image
                   source={{ uri: item.strMealThumb }}
-                  style={{ width: 300, height: 300 }}
+                  style={{ width: 390, height: 335 }}
                 />
                 <Text>{item.strMeal}</Text>
               </TouchableOpacity>
-            </View>
+            </>
           );
         }}
       />

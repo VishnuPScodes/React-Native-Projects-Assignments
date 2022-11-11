@@ -9,9 +9,13 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { changePath } from "../../redux/action";
 import { useEffect, useState } from "react";
 export default function Starter({ navigation }) {
   const [data, setData] = useState([]);
+    const dispatch = useDispatch();
+  const [path,setPath]=useState('Starter')
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Starter")
@@ -32,9 +36,11 @@ export default function Starter({ navigation }) {
             <View>
               <TouchableOpacity
                 onPress={() => {
+                  dispatch(changePath("Starter"));
                   navigation.navigate("Details", {
                     image: item.strMealThumb,
                     name: item.strMeal,
+                    path: path,
                   });
                 }}
                 style={styles.content}

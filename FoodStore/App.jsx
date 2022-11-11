@@ -2,6 +2,8 @@ import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import {store} from './src/redux/store'
 import {
   StyleSheet,
   Text,
@@ -15,19 +17,22 @@ import { useEffect, useState } from "react";
 import Foods from "./src/pages/Foods";
 import { AuthStackComponent } from "./src/StackNav";
 import DashbordDrawer from "./src/DrawerNav";
+import TabScreens from "./src/TabScreen";
 
 const rootStack = createNativeStackNavigator();
 
 const RootApplication = () => {
   
   return (
-    <rootStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <rootStack.Screen name="foods" component={DashbordDrawer} />
-    </rootStack.Navigator>
+    <Provider store={store}>
+      <rootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <rootStack.Screen name="foods" component={TabScreens} />
+      </rootStack.Navigator>
+    </Provider>
   );
 };
 

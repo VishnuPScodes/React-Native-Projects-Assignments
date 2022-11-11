@@ -11,8 +11,11 @@ import {
   Image,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { changePath } from "../../redux/action";
+import { useDispatch } from "react-redux";
 export default function Chicken({ navigation }) {
   const [data, setData] = useState([]);
+  const dispatch=useDispatch();
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken")
@@ -31,11 +34,14 @@ export default function Chicken({ navigation }) {
         renderItem={({ item }) => {
           return (
             <View>
+              
               <TouchableOpacity
                 onPress={() => {
+                    dispatch(changePath("Chicken"));
                   navigation.navigate("Details", {
                     image: item.strMealThumb,
                     name: item.strMeal,
+                    path:'Chicken'
                   });
                 }}
                 style={styles.content}

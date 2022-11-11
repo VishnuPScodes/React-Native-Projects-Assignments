@@ -10,8 +10,11 @@ import {
   Image,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { changePath } from "../redux/action";
 export default function Foods({ navigation }) {
   const [data, setData] = useState([]);
+     const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood")
@@ -32,9 +35,11 @@ export default function Foods({ navigation }) {
             <View>
               <TouchableOpacity
                 onPress={() => {
+                     dispatch(changePath("Foods"));
                   navigation.navigate("Details", {
                     image: item.strMealThumb,
                     name: item.strMeal,
+                    path:'Foods'
                   });
                 }}
                 style={styles.content}

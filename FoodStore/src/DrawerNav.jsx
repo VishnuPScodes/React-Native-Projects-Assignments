@@ -3,7 +3,7 @@ import Beef from "./pages/Categories/Beef";
 import Chicken from "./pages/Categories/Chicken";
 import Dessert from "./pages/Categories/Dessert";
 import Starter from "./pages/Categories/Starter";
-import { Profile } from "./pages/Profile";
+import { Profile } from "./Profile";
 import { AuthStackComponent } from "./StackNav";
 
 
@@ -12,7 +12,9 @@ import { AuthStackComponent } from "./StackNav";
 const DashbordStack = createDrawerNavigator();
 export default function DashbordDrawer() {
   return (
-    <DashbordStack.Navigator initialRouteName="Food">
+    <DashbordStack.Navigator
+   
+    >
       <DashbordStack.Screen name="Food" component={AuthStackComponent} />
       <DashbordStack.Screen name="Profile" component={Profile} />
       <DashbordStack.Screen name="Beef" component={Beef} />
