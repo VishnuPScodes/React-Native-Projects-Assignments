@@ -2,8 +2,8 @@ import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from "react-redux";
-import {store} from './src/redux/store'
+import { Provider, useSelector } from "react-redux";
+import { store } from "./src/redux/store";
 import {
   StyleSheet,
   Text,
@@ -18,21 +18,25 @@ import Foods from "./src/pages/Foods";
 import { AuthStackComponent } from "./src/StackNav";
 import DashbordDrawer from "./src/DrawerNav";
 import TabScreens from "./src/TabScreen";
+import { Signin } from "./src/pages/Signin";
+import { AuthStackSignIn } from "./src/AuthStack";
 
 const rootStack = createNativeStackNavigator();
 
 const RootApplication = () => {
-  
+  const auth = useSelector((state) => state.auth);
   return (
-    <Provider store={store}>
-      <rootStack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+    <rootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      {auth ? (
         <rootStack.Screen name="foods" component={TabScreens} />
-      </rootStack.Navigator>
-    </Provider>
+      ) : (
+       <rootStack.Screen name="Signin" component={Signin} />
+      )}
+    </rootStack.Navigator>
   );
 };
 
@@ -40,10 +44,12 @@ export default function App() {
   const [data, setData] = useState([]);
 
   return (
-    <NavigationContainer>
-      <RootApplication />
-     
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootApplication />
+        {/* <Signin/> */}
+      </NavigationContainer>
+    </Provider>
   );
 }
 

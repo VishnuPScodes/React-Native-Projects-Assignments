@@ -34,21 +34,20 @@ export default function Chicken({ navigation }) {
         renderItem={({ item }) => {
           return (
             <View>
-              
               <TouchableOpacity
                 onPress={() => {
-                    dispatch(changePath("Chicken"));
+                  dispatch(changePath("Chicken"));
                   navigation.navigate("Details", {
                     image: item.strMealThumb,
                     name: item.strMeal,
-                    path:'Chicken'
+                    path: "Chicken",
                   });
                 }}
                 style={styles.content}
               >
                 <Image
                   source={{ uri: item.strMealThumb }}
-                  style={{ width: 300, height: 300 }}
+                  style={{ width: 410, height: 335 }}
                 />
                 <Text>{item.strMeal}</Text>
               </TouchableOpacity>
@@ -72,5 +71,19 @@ const styles = StyleSheet.create({
   main: {
     marginVertical: 50,
   },
-  content: {},
+  content: {
+    width: "100%",
+    height: 400,
+    backgroundColor: "#ff1a75",
+    marginTop: 40,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 29,
+      height: 25,
+    },
+    shadowOpacity: 0.55,
+    shadowRadius: 2.84,
+
+    elevation: 100,
+  },
 });

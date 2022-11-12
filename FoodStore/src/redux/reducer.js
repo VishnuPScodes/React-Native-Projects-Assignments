@@ -1,20 +1,31 @@
-import { navActions } from "./action"
+import { navActions } from "./action";
 
+const initState = {
+  path: "",
+  auth: false,
+};
 
-
-const initState={
-    path:''
-}
-
-export const navReducer=(state=initState,action)=>{
-    switch(action.type){
-        case navActions.CHANGE_PATH :{
-            return {
-                ...state,
-                path:action.payload
-            }
-        }
-        default :
-        return state
+export const navReducer = (state = initState, action) => {
+  switch (action.type) {
+    case navActions.CHANGE_PATH: {
+      return {
+        ...state,
+        path: action.payload,
+      };
     }
-}
+    case navActions.AUTH_LOGIN :{
+      return {
+        ...state,
+        auth:true
+      }
+    }
+    case navActions.AUTH_LOGOUT :{
+      return {
+        ...state,
+        auth:false
+      }
+    }
+    default:
+      return state;
+  }
+};

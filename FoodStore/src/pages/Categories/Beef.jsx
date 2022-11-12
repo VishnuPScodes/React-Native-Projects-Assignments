@@ -48,7 +48,7 @@ export default function Beef({ navigation }) {
               >
                 <Image
                   source={{ uri: item.strMealThumb }}
-                  style={{ width: 390, height: 335 }}
+                  style={{ width: 410, height: 335 }}
                 />
                 <Text>{item.strMeal}</Text>
               </TouchableOpacity>
@@ -72,5 +72,19 @@ const styles = StyleSheet.create({
   main: {
     marginVertical: 50,
   },
-  content: {},
+  content: {
+    width: "100%",
+    height: 400,
+    backgroundColor: "#ff1a75",
+    marginTop: 40,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 29,
+      height: 25,
+    },
+    shadowOpacity: 0.55,
+    shadowRadius: 2.84,
+
+    elevation: 100,
+  },
 });

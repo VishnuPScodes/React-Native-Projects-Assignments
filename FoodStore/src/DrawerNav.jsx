@@ -13,7 +13,12 @@ const DashbordStack = createDrawerNavigator();
 export default function DashbordDrawer() {
   return (
     <DashbordStack.Navigator
-   
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: "#ff1a75",
+          width: 240,
+        },
+      }}
     >
       <DashbordStack.Screen name="Food" component={AuthStackComponent} />
       <DashbordStack.Screen name="Profile" component={Profile} />

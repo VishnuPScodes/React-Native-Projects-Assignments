@@ -5,6 +5,7 @@ import Dessert from "./pages/Categories/Dessert";
 import Starter from "./pages/Categories/Starter";
 import { Details } from "./pages/Details";
 import Foods from "./pages/Foods";
+import { Signin } from "./pages/Signin";
 export const AuthStack = createNativeStackNavigator();
 
 export const AuthStackComponent = () => {
@@ -44,6 +45,11 @@ export const AuthStackComponent = () => {
         name="Details"
         component={Details}
         options={{ title: "Food Details" }}
+      />
+      <AuthStack.Screen
+        name="Signin"
+        component={Signin}
+        options={{ title: "Sign in" }}
       />
     </AuthStack.Navigator>
   );
