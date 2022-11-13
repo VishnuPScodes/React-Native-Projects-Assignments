@@ -12,51 +12,61 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changePath } from "../redux/action";
+import { Logo } from "../components/Logo";
 export default function Foods({ navigation }) {
   const [data, setData] = useState([]);
-     const dispatch = useDispatch();
+  const [loader,setLoader]=useState(true);
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood")
       .then((e) => {
         setData(e.data.meals);
-      });
+      }).then(()=>{
+        setLoader(false);
+      })
   }, []);
 
   return (
-    <View>
-      <Text>Welcome to food store</Text>
+    <>
+      {loader ? (
+        <Logo />
+      ) : (
+        <View>
+          <Text>Welcome to food store</Text>
 
-      <FlatList
-        keyExtractor={(item) => item.idMeal}
-        data={data}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch(changePath("Foods"));
-                  navigation.navigate("Details", {
-                    image: item.strMealThumb,
-                    name: item.strMeal,
-                    path: "Foods",
-                  });
-                }}
-                style={styles.content}
-              >
-                <Image
-                  source={{ uri: item.strMealThumb }}
-                  style={{ width: 390, height: 335 }}
-                />
-                <Text>{item.strMeal}</Text>
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-      />
+          <FlatList
+            keyExtractor={(item) => item.idMeal}
+            data={data}
+            renderItem={({ item }) => {
+              return (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch(changePath("Foods"));
+                      navigation.navigate("Details", {
+                        image: item.strMealThumb,
+                        name: item.strMeal,
+                        path: "Foods",
+                      });
+                    }}
+                    style={styles.content}
+                  >
+                    <Image
+                      source={{ uri: item.strMealThumb }}
+                      style={{ width: 390, height: 335 }}
+                    />
+                    <Text>{item.strMeal}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
+          />
 
-      <Text>Yes</Text>
-    </View>
+          <Text>Yes</Text>
+        </View>
+      )}
+    </>
   );
 }
 

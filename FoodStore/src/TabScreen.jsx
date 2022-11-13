@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
 import DashbordDrawer from "./DrawerNav";
+import { Cart } from "./pages/Cart";
 import { Explore } from "./pages/Explore";
 import { Profile } from "./Profile";
 
@@ -31,7 +32,6 @@ export default function TabScreens() {
         name="Profile"
         component={Profile}
         options={{
-          
           tabBarIcon: ({ size, focused, color }) => {
             return (
               <Image
@@ -44,11 +44,28 @@ export default function TabScreens() {
           },
         }}
       />
+
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={{
+                  uri: "https://cdn-icons-png.flaticon.com/512/263/263142.png",
+                }}
+              />
+            );
+          },
+        }}
+      />
+
       <Tab.Screen
         name="Settings"
         component={Explore}
         options={{
-         
           tabBarIcon: ({ size, focused, color }) => {
             return (
               <Image

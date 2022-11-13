@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Logo } from "./components/Logo";
 import Beef from "./pages/Categories/Beef";
 import Chicken from "./pages/Categories/Chicken";
 import Dessert from "./pages/Categories/Dessert";
