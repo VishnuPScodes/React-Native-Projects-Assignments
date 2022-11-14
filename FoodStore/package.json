@@ -8,6 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+  "resolutions": {
+    "expo-modules-autolinking": "~0.8.1"
+  },
   "dependencies": {
     "@react-native-community/picker": "^1.8.1",
     "@react-native-picker/picker": "2.4.8",
