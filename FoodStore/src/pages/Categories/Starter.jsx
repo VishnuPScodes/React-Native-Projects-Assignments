@@ -9,13 +9,14 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch ,useSelector } from "react-redux";
 import { changePath } from "../../redux/action";
 import { useEffect, useState } from "react";
 export default function Starter({ navigation }) {
   const [data, setData] = useState([]);
-    const dispatch = useDispatch();
-  const [path,setPath]=useState('Starter')
+  const dispatch = useDispatch();
+  const color = useSelector((state) => state.theme);
+  const [path, setPath] = useState("Starter");
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Starter")
@@ -43,7 +44,21 @@ export default function Starter({ navigation }) {
                     path: path,
                   });
                 }}
-                style={styles.content}
+                style={{
+                  width: "100%",
+                  height: 400,
+                  backgroundColor: color,
+                  marginTop: 40,
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 29,
+                    height: 25,
+                  },
+                  shadowOpacity: 0.55,
+                  shadowRadius: 2.84,
+
+                  elevation: 100,
+                }}
               >
                 <Image
                   source={{ uri: item.strMealThumb }}

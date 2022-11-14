@@ -1,4 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useSelector } from "react-redux";
 import Beef from "./pages/Categories/Beef";
 import Chicken from "./pages/Categories/Chicken";
 import Dessert from "./pages/Categories/Dessert";
@@ -11,11 +12,12 @@ import { AuthStackComponent } from "./StackNav";
 
 const DashbordStack = createDrawerNavigator();
 export default function DashbordDrawer() {
+  const color=useSelector((state)=>state.theme);
   return (
     <DashbordStack.Navigator
       screenOptions={{
         drawerStyle: {
-          backgroundColor: "#ff1a75",
+          backgroundColor:color,
           width: 240,
         },
       }}

@@ -10,21 +10,23 @@ import {
   Image,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch ,useSelector } from "react-redux";
 import { changePath } from "../redux/action";
 import { Logo } from "../components/Logo";
 export default function Foods({ navigation }) {
   const [data, setData] = useState([]);
-  const [loader,setLoader]=useState(true);
+  const [loader, setLoader] = useState(true);
   const dispatch = useDispatch();
+  const color = useSelector((state) => state.theme);
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood")
       .then((e) => {
         setData(e.data.meals);
-      }).then(()=>{
-        setLoader(false);
       })
+      .then(() => {
+        setLoader(false);
+      });
   }, []);
 
   return (
@@ -50,7 +52,21 @@ export default function Foods({ navigation }) {
                         path: "Foods",
                       });
                     }}
-                    style={styles.content}
+                    style={{
+                      width: "100%",
+                      height: 400,
+                      backgroundColor: color,
+                      marginTop: 40,
+                      shadowColor: "#000",
+                      shadowOffset: {
+                        width: 29,
+                        height: 25,
+                      },
+                      shadowOpacity: 0.55,
+                      shadowRadius: 2.84,
+
+                      elevation: 100,
+                    }}
                   >
                     <Image
                       source={{ uri: item.strMealThumb }}

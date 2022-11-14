@@ -3,6 +3,8 @@ import { navActions } from "./action";
 const initState = {
   path: "",
   auth: false,
+  cart: [],
+  theme: "#ff1a75",
 };
 
 export const navReducer = (state = initState, action) => {
@@ -25,6 +27,19 @@ export const navReducer = (state = initState, action) => {
         auth:false
       }
     }
+    case navActions.ADD_TO_CART :{
+      return {
+        ...state,
+        cart:[...state.cart,action.payload]
+      }
+    }
+    case navActions.CHANGE_THEME :{
+      return {
+        ...state,
+        theme:action.payload
+      }
+    }
+    
     default:
       return state;
   }

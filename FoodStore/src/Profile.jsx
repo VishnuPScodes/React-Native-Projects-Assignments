@@ -1,5 +1,5 @@
 import { View ,Text,TouchableOpacity ,StyleSheet} from "react-native"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { authLogOut } from "./redux/action";
 
 
@@ -7,32 +7,42 @@ import { authLogOut } from "./redux/action";
 
 export const Profile=()=>{
     const disparch=useDispatch();
+    const color=useSelector((state)=>state.theme);
     const handleSign=()=>{
         disparch(authLogOut());
     }
-    return <View>
-        <Text style={styles.text}>Welcome</Text>
+    return (
+      <View>
+        <Text
+          style={{
+            color: color,
+            textAlign: "center",
+            fontSize: 55,
+          }}
+        >
+          Welcome
+        </Text>
         <TouchableOpacity onPress={handleSign}>
-            <Text style={styles.button} >Sign Out</Text>
+          <Text
+            style={{
+              backgroundColor: color,
+              height: 40,
+              marginTop: 50,
+              borderBottomLeftRadius: 5,
+              borderBottomRightRadius: 10,
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 0,
+              color: "white",
+              textAlign: "center",
+              fontSize: 23,
+            }}
+          >
+            Sign Out
+          </Text>
         </TouchableOpacity>
-    </View>
+      </View>
+    );
 }
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#ff1a75",
-    height: 40,
-    marginTop: 50,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 0,
-    color:"white",
-    textAlign:"center",
-    fontSize:23
-  },
-  text: {
-    color: "#ff1a75",
-    textAlign: "center",
-    fontSize: 55,
-  },
+ 
 });
