@@ -15,10 +15,10 @@ var color = "#ff1a75";
 export const Details = ({ route, navigation }) => {
   const reduxPath = useSelector((state) => state.path);
   const dispatch = useDispatch();
-   color=useSelector((state)=>state.theme)
+  color = useSelector((state) => state.theme);
   const [click, setClick] = useState(false);
   const { image, name, path } = route.params;
-  console.log('coloris',color);
+  console.log("coloris", color);
   useFocusEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", onBackPress2);
   });
@@ -30,12 +30,9 @@ export const Details = ({ route, navigation }) => {
       image: image,
       name: name,
     };
-    if (click) {
-      Alert.alert("Already added to the cart");
-    } else {
-      dispatch(addToCart(obj));
-      setClick(true);
-    }
+
+    dispatch(addToCart(obj));
+    setClick(true);
   };
   return (
     <ScrollView>
