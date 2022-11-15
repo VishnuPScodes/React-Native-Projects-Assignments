@@ -1,7 +1,35 @@
-import { View, TextInput, TouchableOpacity ,StyleSheet ,Text} from "react-native";
-import {useState} from 'react'
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Alert,
+} from "react-native";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "./redux/action";
 export const TodoInput = () => {
-  const [text, setText] = useState("");
+  const [id, setId] = useState(1);
+  const [text, setText] = useState(null);
+  const dispatch = useDispatch();
+  const handlePress = () => {
+    if (text == null) {
+      Alert.alert("Please add something...");
+    } else {
+      setId((p) => p + 1);
+      var date_time = new Date().toLocaleString();
+
+      let obj = {
+        todo: text,
+        status: false,
+        id: id,
+        date: date_time,
+      };
+      dispatch(addTodo(obj));
+     // setText(null)
+    }
+  };
   return (
     <View style={styles.container}>
       <TextInput
@@ -11,15 +39,15 @@ export const TodoInput = () => {
           borderWidth: 1,
           placeholderTextColor: "gray",
           borderRadius: 16,
-          color:"grey",
-       
+          color: "grey",
         }}
         onChangeText={(text) => setText(text)}
         value={text}
         placeholder="Add a task"
       />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Submit</Text>
+
+      <TouchableOpacity onPress={handlePress} style={styles.button}>
+        <Text style={styles.text}>Add to todo</Text>
       </TouchableOpacity>
     </View>
   );
@@ -33,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     height: 50,
     textAlign: "center",
-    borderRadius:16
+    borderRadius: 16,
   },
   container: {
     paddingTop: 100,
@@ -42,6 +70,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 20,
-    paddingTop:12
+    paddingTop: 12,
   },
 });
